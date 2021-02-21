@@ -8,17 +8,17 @@
 		<version>2.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.nagarro.microservices</groupId>
-	<artifactId>providerService</artifactId>
+	<groupId>com.nagarro.microservices.pricseService</groupId>
+	<artifactId>priceService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>providerService</name>
-	<description>providerService</description>
+	<name>priceService</name>
+	<description>priceService</description>
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>2020.0.1</spring-cloud.version>
 	</properties>
 	<dependencies>
-		<dependency>
+	    <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -27,7 +27,7 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
-        <dependency>
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>

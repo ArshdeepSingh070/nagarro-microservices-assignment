@@ -5,10 +5,10 @@ public class Provider {
 	private String id;
 	private String name;
 	private String gender;
-	private String profession;
+	private ServiceInfo profession;
 	private String phoneNo;
 
-	public Provider(String id, String name, String gender, String profession, String phoneNo) {
+	public Provider(String id, String name, String gender, ServiceInfo profession, String phoneNo) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -41,11 +41,11 @@ public class Provider {
 		this.gender = gender;
 	}
 
-	public String getProfession() {
+	public ServiceInfo getProfession() {
 		return profession;
 	}
 
-	public void setProfession(String profession) {
+	public void setProfession(ServiceInfo profession) {
 		this.profession = profession;
 	}
 
