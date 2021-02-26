@@ -14,7 +14,7 @@ public class PriceDaoImpl implements com.nagarro.microservices.price.dao.PriceDa
 	@Override
 	public double getPrice(String id) {
 		List<Price> pricesList = storedPrices();
-		Optional<Price> price = pricesList.stream().filter(p -> id.equals(p.getProfessionId())).findFirst();
+		Optional<Price> price = pricesList.stream().filter(p -> id.equals(p.getServiceId())).findFirst();
 		return price.get().getAmount();
 	}
 

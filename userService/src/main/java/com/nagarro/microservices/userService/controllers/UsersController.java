@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.nagarro.microservices.userService.models.Service;
 import com.nagarro.microservices.userService.models.User;
 import com.nagarro.microservices.userService.services.UserService;
 import com.netflix.appinfo.InstanceInfo;
@@ -42,35 +43,33 @@ public class UsersController {
 		return userService.getUserDetails(id);
 
 	}
-
-	@GetMapping("/allServices")
-	List<String> findAllServices() {
-
-		/*
-		 * Map<String, String> services = new HashMap<>(); services.put("001",
-		 * "electrician"); services.put("002", "mechanic"); services.put("003",
-		 * "hair dresser"); return services;
-		 */
-
-		List<String> serviceList = new ArrayList<>();
-		String url = "/provider/allServices";
-
-		InstanceInfo instance = eurekaClient.getNextServerFromEureka("providers", false);
-		serviceList = restTemplate.getForObject(instance.getHomePageUrl() + url, ArrayList.class);
-
-		return serviceList;
-
-	}
-	
 	
 	@PostMapping("/add")
 	public String adduser(User user) {
 		
 		return userService.addUser(user);
 	}
+	
+	//@HystrixCommand(fallbackMethod = "serviceProvider_Fallback")
+	@GetMapping("/searchService/{code}")
+	Service serachService(@PathVariable(name = "code") String code) {
+		
+		Service service;
+		String url = "/service/"+code;
+		InstanceInfo instance  = eurekaClient.getNextServerFromEureka("provider", false);
+		service = restTemplate.getForObject(instance.getHomePageUrl()+ url, Service.class);
+		return service;
+	}
+	
+	@SuppressWarnings("unused")
+	private String serviceProvider_Fallback(String id) {
+		System.out.println("serviceProvider Service is down!!! fallback route enabled...");
+		return "Service taking long at this moment or is down. pls try after some time - " + new Date();
+	}
+
 
 	// Check inter service connections
-	@HystrixCommand(fallbackMethod = "callStudentServiceAndGetData_Fallback")
+	//@HystrixCommand(fallbackMethod = "callStudentServiceAndGetData_Fallback")
 	@GetMapping("/testOrder/{id}")
 	String testOrder(@PathVariable(name = "id") String id) {
 
@@ -89,16 +88,10 @@ public class UsersController {
 		return "CIRCUIT BREAKER ENABLED!!!No Response From Student Service at this moment. Service will be back shortly - " + new Date();
 	}
 
-	@GetMapping(value = "/service/{id}")
-	String checkServiceStatus(@PathVariable(name = "id") String id) {
-		return id + "service is available";
-	}
-
 	@GetMapping("/test")
 	String testService() {
 		return "welcome to user service";
 	}
 
-	// ADD USER POST METHOD IS TO IMPLEMENT
 
 }

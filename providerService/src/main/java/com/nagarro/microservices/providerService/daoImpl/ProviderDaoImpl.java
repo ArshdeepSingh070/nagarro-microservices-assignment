@@ -1,4 +1,4 @@
-package com.nagarro.microservice.providerService.dao.impl;
+package com.nagarro.microservices.providerService.daoImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,15 +8,16 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import com.nagarro.microservice.providerService.dao.ProviderDao;
-import com.nagarro.microservice.providerService.models.ServiceInfo;
-import com.nagarro.microservice.providerService.models.Provider;
+import com.nagarro.microservices.providerService.dao.ProviderDao;
+import com.nagarro.microservices.providerService.model.AvailabilityStatus;
+import com.nagarro.microservices.providerService.model.Provider;
+import com.nagarro.microservices.providerService.model.ServiceInfo;
 
 @Component
 public class ProviderDaoImpl implements ProviderDao {
 
 	@Override
-	public Provider findProvider(String id) {
+	public Provider getProviderDetails(String id) {
 		List<Provider> providers = allStoredProviders();
 
 		Optional<Provider> reqProvider = providers.stream().filter(pro -> id.equals(pro.getId())).findAny();
@@ -25,7 +26,7 @@ public class ProviderDaoImpl implements ProviderDao {
 	}
 
 	@Override
-	public ServiceInfo findService(String id) {
+	public ServiceInfo getServiceDetails(String id) {
 		List<ServiceInfo> servicesList = allServices();
 		Optional<ServiceInfo> reqService = servicesList.stream().filter(ser -> id.equals(ser.getId())).findFirst();
 		return reqService.get();
@@ -40,21 +41,22 @@ public class ProviderDaoImpl implements ProviderDao {
 		}
 		return servicesDetails;
 	}
-
+	
 	protected List<Provider> allStoredProviders() {
 
 		List<Provider> providersList = new ArrayList<>();
 
-		providersList.add(new Provider("001", "xyz", "male", null, "78594778998"));
+		providersList.add(new Provider("001", "xyz", "male", "001", "78594778998", AvailabilityStatus.AVAILABLE));
 
 		return providersList;
 	}
 
+	// Sudo service info for demo
 	protected List<ServiceInfo> allServices() {
 		List<ServiceInfo> servicesList = new ArrayList<>();
 		servicesList.add(new ServiceInfo("001", "Mechanic", "Repair cars and bikes"));
 		servicesList.add(new ServiceInfo("002", "Electrician", "Repair electronic gadets"));
-		servicesList.add(new ServiceInfo("001", "hair dresser", "hair dressing"));
+		servicesList.add(new ServiceInfo("003", "hair dresser", "Hair dressing"));
 		return servicesList;
 	}
 

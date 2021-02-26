@@ -18,24 +18,29 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public User findUser(String id) {
-		List<User> users = allStoredUser();
-		Optional<User> reuiredUser = users.stream().filter(user -> id.equals(user.getId())).findFirst();
-		return reuiredUser.get();
+		allStoredUser();
+		User reuiredUser = users.get(id);
+		return reuiredUser;
 	}
 	
 	@Override
 	public String addUser(User user) {
+		if(user.getId() == null) {
+			return "User id can not be null";
+		}
 		users.put(user.getId(), user);
 		return "USER" + user.getId() + "ADDED SUCCESSFULLY";
 	}
 
-	protected List<User> allStoredUser() {
+	
+	// pseudo user for demo purpose
+	protected Map<String, User> allStoredUser() {
 
-		List<User> usersList = new ArrayList<>();
+		User user = new User("101", "Arsh", "male", "arsh@123.com","7536578799");
 
-		usersList.add(new User("001", "Arsh", "male", "arsh@123.com","7536578799"));
+		users.put(user.getId(), user);
 
-		return usersList;
+		return users;
 
 	}
 

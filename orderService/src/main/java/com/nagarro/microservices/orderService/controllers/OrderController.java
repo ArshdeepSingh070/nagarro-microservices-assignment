@@ -1,13 +1,38 @@
 package com.nagarro.microservices.orderService.controllers;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.nagarro.microservices.orderService.model.Order;
+import com.nagarro.microservices.orderService.service.OrderService;
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
 
 @RestController
 @RequestMapping("/order")
 public class OrderController {
+	
+	
+	@Resource
+	OrderService orderService;
+	
+	@GetMapping("/{orderId}")
+	Order getOrderDetails(@PathVariable(name = "orderId") String id) {
+		return orderService.getOrderDetails(id);
+	}
+	
+	@GetMapping("/doPayment/{orderId}")
+	String doPayment(@PathVariable(name = "orderId") String orderId) {
+		String paymentStatus = orderService.doPayment(orderId);
+		return paymentStatus;
+	}
 	
 	@GetMapping("/test1")
 	String test1Order() {

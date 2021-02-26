@@ -3,12 +3,12 @@ package com.nagarro.microservice.price.model;
 public class Price {
 
 	private double amount;
-	private String professionId;
+	private String serviceId;
 
-	public Price(double amount, String professionId) {
+	public Price(double amount, String serviceId) {
 		super();
 		this.amount = amount;
-		this.professionId = professionId;
+		this.serviceId = serviceId;
 	}
 
 	public double getAmount() {
@@ -19,12 +19,14 @@ public class Price {
 		this.amount = amount;
 	}
 
-	public String getProfessionId() {
-		return professionId;
+	public String getServiceId() {
+		return serviceId;
 	}
 
-	public void setProfessionId(String professionId) {
-		this.professionId = professionId;
+	public void setServiceId(String serviceId) {
+		this.serviceId = serviceId;
 	}
+
+	
 
 }

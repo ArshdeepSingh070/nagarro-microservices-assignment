@@ -1,12 +1,12 @@
-package com.nagarro.microservice.providerService.models;
+package com.nagarro.microservices.userService.models;
 
-public class ServiceInfo {
+public class Service {
 
 	private String id;
 	private String name;
 	private String description;
-
-	public ServiceInfo(String id, String name, String description) {
+	
+	public Service(String id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -36,5 +36,6 @@ public class ServiceInfo {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
+	
 }
