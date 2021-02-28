@@ -19,8 +19,8 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User findUser(String id) {
 		allStoredUser();
-		User reuiredUser = users.get(id);
-		return reuiredUser;
+		User requiredUser = users.get(id);
+		return requiredUser;
 	}
 	
 	@Override

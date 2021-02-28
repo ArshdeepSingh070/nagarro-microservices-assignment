@@ -12,5 +12,9 @@ public interface ProviderService {
 	Map<String, String> getAllServices();
 
 	ServiceInfo getServiceDetails(String id);
+	
+	void isServiceAvaialbleForOrder(String serviceId, String orderId);
+	
+	Provider getProviderForService(String serviceId);
 
 }

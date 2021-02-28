@@ -33,6 +33,15 @@ public class ProviderDaoImpl implements ProviderDao {
 	}
 
 	@Override
+	public List<Provider> getProvidersForServiec(String serviceId) {
+		List<Provider> providerList = allStoredProviders();
+		List<Provider> requiredProviders = (List<Provider>) providerList.stream()
+				.filter(pl -> serviceId.equals(pl.getServiceId()));
+
+		return requiredProviders;
+	}
+
+	@Override
 	public Map<String, String> getAllServices() {
 		List<ServiceInfo> servicesList = allServices();
 		Map<String, String> servicesDetails = new HashMap<>();
@@ -41,7 +50,7 @@ public class ProviderDaoImpl implements ProviderDao {
 		}
 		return servicesDetails;
 	}
-	
+
 	protected List<Provider> allStoredProviders() {
 
 		List<Provider> providersList = new ArrayList<>();

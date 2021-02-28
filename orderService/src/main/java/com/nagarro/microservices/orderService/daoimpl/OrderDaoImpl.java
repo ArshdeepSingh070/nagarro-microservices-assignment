@@ -1,5 +1,6 @@
 package com.nagarro.microservices.orderService.daoimpl;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,9 +31,10 @@ public class OrderDaoImpl implements OrderDao {
 	}
 	
 
+	// Pseudo order Details for demo
 	List<Order> createdOrder(){
 		List<Order> orderList = new ArrayList<>();
-		Order order = new Order("001", "101", OrderStatus.PROCESSING, null, 0, 500);
+		Order order = new Order("001", "101", "201", "301", OrderStatus.PROCESSING, null, 0, 500);
 		orderList.add(order);
 		return orderList;
 	}

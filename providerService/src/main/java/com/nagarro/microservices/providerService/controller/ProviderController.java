@@ -57,7 +57,7 @@ public class ProviderController {
 		@GetMapping(value = "/price/{id}")
 		double getPriceForService(@PathVariable(name = "id") String id) {
 			ServiceInfo service = providerService.getServiceDetails(id);
-			String url = "/price?serviceId=" + service.getId();
+			String url = "/price/get/" + service.getId();
 			InstanceInfo instance = eurekaClient.getNextServerFromEureka("price", false);
 			double price = restTemplate.getForObject(instance.getHomePageUrl() + url, double.class);
 			return price;

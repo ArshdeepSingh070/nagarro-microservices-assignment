@@ -7,4 +7,5 @@ public interface OrderDao {
 	Order getOrder(String id);
 	
 	void updateOrder(Order order);
+	
 }

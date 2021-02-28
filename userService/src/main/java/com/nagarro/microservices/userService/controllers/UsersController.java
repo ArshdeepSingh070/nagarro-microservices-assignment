@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -39,7 +40,7 @@ public class UsersController {
 	@GetMapping(value = "/{id}")
 	User getUserDetailsByid(@PathVariable(name = "id") String id) {
 
-		System.out.println("Inside User Controller");
+		Optional.ofNullable(id).orElse("User ID can not be empty");
 		return userService.getUserDetails(id);
 
 	}
@@ -55,7 +56,7 @@ public class UsersController {
 	Service serachService(@PathVariable(name = "code") String code) {
 		
 		Service service;
-		String url = "/service/"+code;
+		String url = "/provider/"+code;
 		InstanceInfo instance  = eurekaClient.getNextServerFromEureka("provider", false);
 		service = restTemplate.getForObject(instance.getHomePageUrl()+ url, Service.class);
 		return service;
