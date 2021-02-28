@@ -30,6 +30,11 @@ public class OrderDaoImpl implements OrderDao {
 		
 	}
 	
+    @Override
+	public void saveOrder(Order order) {
+		this.orders.put(order.getOrderId(), order);
+	}
+	
 
 	// Pseudo order Details for demo
 	List<Order> createdOrder(){
@@ -38,4 +43,5 @@ public class OrderDaoImpl implements OrderDao {
 		orderList.add(order);
 		return orderList;
 	}
+
 }

@@ -8,6 +8,7 @@ public class Provider {
 	private String serviceId;
 	private String phoneNo;
 	private AvailabilityStatus currentStatus;
+	
 	public Provider(String id, String name, String gender, String serviceId, String phoneNo,
 			AvailabilityStatus currentStatus) {
 		super();

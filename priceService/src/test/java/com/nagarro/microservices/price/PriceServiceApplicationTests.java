@@ -1,10 +1,10 @@
-package com.nagarro.microservices.extra;
+package com.nagarro.microservices.price;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ExtraApplicationTests {
+class PriceServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

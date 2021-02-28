@@ -5,12 +5,16 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import com.nagarro.microservices.providerService.dao.ProviderDao;
 import com.nagarro.microservices.providerService.model.AvailabilityStatus;
 import com.nagarro.microservices.providerService.model.Provider;
 import com.nagarro.microservices.providerService.model.ServiceInfo;
+import com.nagarro.microservices.providerService.model.ServiceRequestInfo;
 import com.nagarro.microservices.providerService.service.ProviderService;
 
 @Service
@@ -18,6 +22,10 @@ public class ProviderServiceImpl implements ProviderService {
 
 	@Resource
 	ProviderDao providerDao;
+	
+	@Autowired 
+	private JmsTemplate jmsTemplate;
+	
 	@Override
 	public Provider getProviderDetails(String id) {
 		
@@ -38,19 +46,12 @@ public class ProviderServiceImpl implements ProviderService {
 
 	@Override
 	@JmsListener(destination="OrderServiceRequest")
-	public void isServiceAvaialbleForOrder(String serviceId, String orderId) {
-		int availabilityCount = 0;
-		List<Provider> providers = providerDao.getProvidersForServiec(serviceId);
-		for (Provider provider : providers) {
-			if (provider.getCurrentStatus().equals(AvailabilityStatus.AVAILABLE)) {
-				availabilityCount++;
-			}
-		}
-
-		if (availabilityCount > 0) {
-			ServiceAvaliableForOrderEvent(orderId);
+	public void isServiceAvaialbleForOrder(ServiceRequestInfo info) {
+		ServiceInfo service = providerDao.getServiceDetails(info.getServiceId());
+		if(service.getAvailability().equals(AvailabilityStatus.AVAILABLE)) {
+			ServiceAvaliableForOrderEvent(info.getOrderId());
 		} else {
-			ServiceNotAvaliableForOrderEvent(orderId);
+			ServiceNotAvaliableForOrderEvent(info.getOrderId());
 		}
 
 	}

@@ -13,6 +13,10 @@ public class Order {
 	private double transactionId;
 	private double amount;
 	
+	public Order() {
+		
+	}
+	
 	public Order(String orderId, String userId, String serviceId, String providerId, OrderStatus orderStatus,
 			Instant creationTime, double transactionId, double amount) {
 		super();

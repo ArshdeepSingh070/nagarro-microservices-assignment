@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.nagarro.microservices.providerService.model.Provider;
 import com.nagarro.microservices.providerService.model.ServiceInfo;
+import com.nagarro.microservices.providerService.model.ServiceRequestInfo;
 
 public interface ProviderService {
 
@@ -13,7 +14,7 @@ public interface ProviderService {
 
 	ServiceInfo getServiceDetails(String id);
 	
-	void isServiceAvaialbleForOrder(String serviceId, String orderId);
+	void isServiceAvaialbleForOrder(ServiceRequestInfo info);
 	
 	Provider getProviderForService(String serviceId);
 

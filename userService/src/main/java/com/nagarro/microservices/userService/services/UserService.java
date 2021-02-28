@@ -1,10 +1,12 @@
 package com.nagarro.microservices.userService.services;
 
+import java.io.IOException;
+
 import com.nagarro.microservices.userService.models.User;
 
 public interface UserService {
 
-	User getUserDetails(String id);
+	User getUserDetails(String id) throws IOException;
 	
-	String addUser(User user);
+	User addUser(User user);
 }

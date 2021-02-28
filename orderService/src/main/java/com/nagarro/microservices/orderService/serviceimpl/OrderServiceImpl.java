@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 
 import com.nagarro.microservices.orderService.dao.OrderDao;
@@ -62,8 +63,8 @@ public class OrderServiceImpl implements OrderService {
 		}
 		order.setCreationTime(Instant.now());
 		order.setOrderStatus(OrderStatus.PROCESSING);
-		
-		jmsTemplate.convertAndSend("OrderServiceRequest", order.getServiceId(), order.getOrderId());
+		orderDao.saveOrder(order);
+		jmsTemplate.convertAndSend("OrderServiceRequest", order);
 		return order;
 	}
 

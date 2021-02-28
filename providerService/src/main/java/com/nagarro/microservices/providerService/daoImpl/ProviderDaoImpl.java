@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -29,14 +31,17 @@ public class ProviderDaoImpl implements ProviderDao {
 	public ServiceInfo getServiceDetails(String id) {
 		List<ServiceInfo> servicesList = allServices();
 		Optional<ServiceInfo> reqService = servicesList.stream().filter(ser -> id.equals(ser.getId())).findFirst();
+		if(!isServiceAvailable(reqService.get())) {
+			reqService.get().setAvailability(AvailabilityStatus.NOTAVAILABLE);
+		}
 		return reqService.get();
 	}
 
 	@Override
 	public List<Provider> getProvidersForServiec(String serviceId) {
 		List<Provider> providerList = allStoredProviders();
-		List<Provider> requiredProviders = (List<Provider>) providerList.stream()
-				.filter(pl -> serviceId.equals(pl.getServiceId()));
+		List<Provider> requiredProviders = providerList.stream().filter(reqPro -> 
+		serviceId.equals(reqPro.getServiceId())).collect(Collectors.toList());
 
 		return requiredProviders;
 	}
@@ -49,6 +54,23 @@ public class ProviderDaoImpl implements ProviderDao {
 			servicesDetails.put(ser.getId(), ser.getName());
 		}
 		return servicesDetails;
+	}
+	
+	protected Boolean isServiceAvailable(ServiceInfo service) {
+		List<Provider> providers = getProvidersForServiec(service.getId());
+		int count = 0;
+		for(Provider pro : providers) {
+			if(pro.getCurrentStatus().equals(AvailabilityStatus.AVAILABLE)) {
+				service.setProviderInfo(pro);
+				break;
+			}else {
+				count++;
+			}
+		}
+		if(count == providers.size()) {
+			return false;
+		}
+		return true;
 	}
 
 	protected List<Provider> allStoredProviders() {
@@ -63,9 +85,9 @@ public class ProviderDaoImpl implements ProviderDao {
 	// Sudo service info for demo
 	protected List<ServiceInfo> allServices() {
 		List<ServiceInfo> servicesList = new ArrayList<>();
-		servicesList.add(new ServiceInfo("001", "Mechanic", "Repair cars and bikes"));
-		servicesList.add(new ServiceInfo("002", "Electrician", "Repair electronic gadets"));
-		servicesList.add(new ServiceInfo("003", "hair dresser", "Hair dressing"));
+		servicesList.add(new ServiceInfo("001", "Mechanic", "Repair cars and bikes", AvailabilityStatus.AVAILABLE, null));
+		servicesList.add(new ServiceInfo("002", "Electrician", "Repair electronic gadets", AvailabilityStatus.AVAILABLE, null));
+		servicesList.add(new ServiceInfo("003", "hair dresser", "Hair dressing", AvailabilityStatus.AVAILABLE, null));
 		return servicesList;
 	}
 

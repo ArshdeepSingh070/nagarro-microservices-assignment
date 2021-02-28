@@ -35,12 +35,12 @@ public class ProviderController {
 		return "Welcome to Provider Service";
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/getService/{id}")
 	ServiceInfo getService(@PathVariable(name = "id") String id) {
 		return providerService.getServiceDetails(id);
 	}
 	
-	@GetMapping(value = "/provider/{id}")
+	@GetMapping(value = "/{id}")
 	Provider getProviderDetails(@PathVariable(name = "id") String id) {
 
 		return providerService.getProviderDetails(id);

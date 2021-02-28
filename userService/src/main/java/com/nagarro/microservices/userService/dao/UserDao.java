@@ -1,10 +1,12 @@
 package com.nagarro.microservices.userService.dao;
 
+import java.io.IOException;
+
 import com.nagarro.microservices.userService.models.User;
 
 public interface UserDao {
 
-	User findUser(String id);
+	User findUser(String id) throws IOException;
 	
-	String addUser(User user);
+	User addUser(User user);
 }

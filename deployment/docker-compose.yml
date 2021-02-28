@@ -1,0 +1,76 @@
+version: "3"
+
+services:
+    discovery-server:
+        container_name: discovery-server
+        image: arshdeepsingh070/msa-urban-discovery-service:2
+        ports:
+                - "8761:8761"
+        volumes:
+                - /tmp:/workspace/logs
+    api-gateway:
+        container_name: api-gateway
+        image: arshdeepsingh070/msa-urban-api-gateway:2
+        ports:
+                - "9999:9999"
+        links:
+                - discovery-server:discovery-server
+        environment:
+                - discovery_server_url=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs
+    user-service:
+        container_name: user-service
+        image: arshdeepsingh070/msa-urban-user-service:2
+        ports:
+                - "8000:8000"
+        links:
+            - discovery-server:discovery-server
+        environment:
+                - discovery_server_url=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs
+    provider-service:
+        container_name: provider-service
+        image: arshdeepsingh070/msa-urban-provider-service:2
+        ports:
+                - "8001:8001"
+        links:
+            - discovery-server:discovery-server
+        environment:
+                - discovery_server_url=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs
+    price-service:
+        container_name: price-service
+        image: arshdeepsingh070/msa-urban-price-service:2
+        ports:
+                - "8002:8002"
+        links:
+            - discovery-server:discovery-server
+        environment:
+                - discovery_server_url=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs 
+    order-service:
+        container_name: order-service
+        image: arshdeepsingh070/msa-urban-order-service:2
+        ports:
+                - "8003:8003"
+        links:
+            - discovery-server:discovery-server
+        environment:
+                - discovery_server_url=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs   
+    payment-service:
+        container_name: payment-service
+        image: arshdeepsingh070/msa-urban-payment-service:2
+        ports:
+                - "8004:8004"
+        links:
+            - discovery-server:discovery-server
+        environment:
+                - discovery_server_url=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs                

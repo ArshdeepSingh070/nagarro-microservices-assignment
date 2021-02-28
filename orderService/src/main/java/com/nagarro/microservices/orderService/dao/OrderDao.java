@@ -8,4 +8,6 @@ public interface OrderDao {
 	
 	void updateOrder(Order order);
 	
+	void saveOrder(Order order);
+	
 }

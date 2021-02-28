@@ -6,6 +6,10 @@ public class Service {
 	private String name;
 	private String description;
 	
+	public Service() {
+		
+	}
+	
 	public Service(String id, String name, String description) {
 		super();
 		this.id = id;
