@@ -24,9 +24,9 @@ public class PriceDaoImpl implements com.nagarro.microservices.price.dao.PriceDa
 	 */
 	protected List<Price> storedPrices() {
 		List<Price> prices = new ArrayList<>();
-		prices.add(new Price(500.0, "001"));
-		prices.add(new Price(500.0, "002"));
-		prices.add(new Price(1000.0, "003"));
+		prices.add(new Price(500.0, "101"));
+		prices.add(new Price(500.0, "102"));
+		prices.add(new Price(1000.0, "103"));
 
 		return prices;
 	}

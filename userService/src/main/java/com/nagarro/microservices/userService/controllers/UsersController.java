@@ -70,7 +70,7 @@ public class UsersController {
 	Service serachService(@PathVariable(name = "code") String code) {
 
 		Service service;
-		String url = "/provider/getService/" + code;
+		String url = "/service/getService/" + code;
 		InstanceInfo instance = eurekaClient.getNextServerFromEureka("provider", false);
 		service = restTemplate.getForObject(instance.getHomePageUrl() + url, Service.class);
 		return service;

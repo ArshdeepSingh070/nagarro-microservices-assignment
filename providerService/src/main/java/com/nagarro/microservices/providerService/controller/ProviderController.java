@@ -20,7 +20,7 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 
 @RestController
-@RequestMapping("/provider")
+@RequestMapping("/service")
 public class ProviderController {
 	
 	@Autowired
