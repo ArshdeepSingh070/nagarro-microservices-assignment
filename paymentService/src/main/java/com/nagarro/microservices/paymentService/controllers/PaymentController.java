@@ -13,11 +13,9 @@ public class PaymentController {
 	
 	Random rand = new Random(); 
 	
-	@GetMapping("/test")
-	String testService() {
-		return "Welcome to Payment Service";
-	}
-	
+	/*
+	 * Doing a sudo payment and generating the transctionId
+	 */
 	@GetMapping()
 	double doPayment(@RequestParam (name = "price") double price) {
 		

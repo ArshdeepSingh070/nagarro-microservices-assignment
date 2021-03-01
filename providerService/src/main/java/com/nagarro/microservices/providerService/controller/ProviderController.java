@@ -38,7 +38,7 @@ public class ProviderController {
 	}
 	
 	@GetMapping("/getService/{id}")
-	ServiceInfo getService(@PathVariable(name = "id") String id) {
+	ServiceInfo getServiceDetails(@PathVariable(name = "id") String id) {
 		return providerService.getServiceDetails(id);
 	}
 	
@@ -67,7 +67,11 @@ public class ProviderController {
 		return providerService.registerService(service);
 	}
 	
-	// Getting price separated due to fluctuating nature of the services
+	/*
+	 * Assuming  fluctuating nature of the services and its price 
+	 * Price service is kept separated which will give live amount of any service 
+	 * once customer selected the service
+	 */
 		@GetMapping(value = "/price/{id}")
 		double getPriceForService(@PathVariable(name = "id") String id) {
 			ServiceInfo service = providerService.getServiceDetails(id);

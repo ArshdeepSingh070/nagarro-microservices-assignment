@@ -93,6 +93,7 @@ public class ProviderDaoImpl implements ProviderDao {
 		return true;
 	}
 
+	// Sudo Provider info for demo purpose only
 	protected List<Provider> allStoredProviders() {
 
 		List<Provider> providersList = new ArrayList<>();
@@ -102,7 +103,7 @@ public class ProviderDaoImpl implements ProviderDao {
 		return providersList;
 	}
 
-	// Sudo service info for demo
+	// Sudo service info for demo purpose only
 	protected List<ServiceInfo> allServices() {
 		List<ServiceInfo> servicesList = new ArrayList<>();
 		servicesList.add(new ServiceInfo("001", "Mechanic", "Repair cars and bikes", AvailabilityStatus.AVAILABLE, null));

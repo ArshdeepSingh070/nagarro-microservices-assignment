@@ -34,7 +34,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	
-	// pseudo user for demo purpose
+	// pseudo user for demo purpose only
 	protected Map<String, User> allStoredUser() {
 
 		User user = new User("101", "Arsh", "male", "arsh@123.com","7536578799");

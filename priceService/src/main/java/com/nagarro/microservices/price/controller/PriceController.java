@@ -16,11 +16,6 @@ public class PriceController {
 	@Resource
 	PriceService priceService;
 	
-	@GetMapping("/test")
-	String testExtra() {
-		return "Welcome to price service";
-	}
-	
 	@GetMapping(value = "/get/{id}")
 	double getPrice(@PathVariable(name = "id") String id) {
 		return priceService.getPrice(id);

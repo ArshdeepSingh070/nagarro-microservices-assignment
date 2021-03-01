@@ -30,6 +30,10 @@ public class OrderController {
 		return orderService.getOrderDetails(id);
 	}
 	
+	/*
+	 * Customer will create a order selecting the required service
+	 * return the order along with its status based on the availability of the service
+	 */
 	@PostMapping("/createOrder")
 	public Order creatOrder(@RequestBody Order order) {
 		return orderService.createOrder(order);	
@@ -43,16 +47,6 @@ public class OrderController {
 	String doPayment(@PathVariable(name = "orderId") String orderId) {
 		String paymentStatus = orderService.doPayment(orderId);
 		return paymentStatus;
-	}
-	
-	@GetMapping("/test1")
-	String test1Order() {
-		return "welcome to order service";
-	}
-	
-	@GetMapping("/test2")
-	String test2Order(@RequestParam (name = "id") String id) {
-		return "welcome to order service:" + id;
 	}
 
 

@@ -18,6 +18,10 @@ public class PriceDaoImpl implements com.nagarro.microservices.price.dao.PriceDa
 		return price.get().getAmount();
 	}
 
+	/*
+	 * Simply kept the price of all the services
+	 * based on the serviceId
+	 */
 	protected List<Price> storedPrices() {
 		List<Price> prices = new ArrayList<>();
 		prices.add(new Price(500.0, "001"));
