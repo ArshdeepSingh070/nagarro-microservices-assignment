@@ -18,6 +18,10 @@ import com.nagarro.microservices.providerService.model.ServiceInfo;
 @Component
 public class ProviderDaoImpl implements ProviderDao {
 
+	private Map<String, Provider> providers = new HashMap<>();
+	
+	private Map<String, ServiceInfo> services = new HashMap<>();
+	
 	@Override
 	public Provider getProviderDetails(String id) {
 		List<Provider> providers = allStoredProviders();
@@ -56,6 +60,22 @@ public class ProviderDaoImpl implements ProviderDao {
 		return servicesDetails;
 	}
 	
+	@Override
+	public Provider addProvider(Provider provider) {
+		provider.setCurrentStatus(AvailabilityStatus.AVAILABLE);
+		providers.put(provider.getId(), provider);
+		return providers.get(provider.getId());
+	
+	}
+	
+	@Override
+	public ServiceInfo registerService(ServiceInfo service) {
+		service.setAvailability(AvailabilityStatus.AVAILABLE);
+		services.put(service.getId(), service);
+		return services.get(service.getId());
+	}
+
+	
 	protected Boolean isServiceAvailable(ServiceInfo service) {
 		List<Provider> providers = getProvidersForServiec(service.getId());
 		int count = 0;
@@ -77,7 +97,7 @@ public class ProviderDaoImpl implements ProviderDao {
 
 		List<Provider> providersList = new ArrayList<>();
 
-		providersList.add(new Provider("001", "xyz", "male", "001", "78594778998", AvailabilityStatus.AVAILABLE));
+		providersList.add(new Provider("001", "xyz", "male", "101", "mechanic", "9918278768", AvailabilityStatus.AVAILABLE));
 
 		return providersList;
 	}
@@ -90,5 +110,8 @@ public class ProviderDaoImpl implements ProviderDao {
 		servicesList.add(new ServiceInfo("003", "hair dresser", "Hair dressing", AvailabilityStatus.AVAILABLE, null));
 		return servicesList;
 	}
+
+	
+	
 
 }

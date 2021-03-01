@@ -71,4 +71,14 @@ public class ProviderServiceImpl implements ProviderService {
 		return null;
 	}
 
+	@Override
+	public Provider addProvider(Provider provider) {
+		return providerDao.addProvider(provider);
+	}
+
+	@Override
+	public ServiceInfo registerService(ServiceInfo service) {
+		return providerDao.registerService(service);
+	}
+
 }

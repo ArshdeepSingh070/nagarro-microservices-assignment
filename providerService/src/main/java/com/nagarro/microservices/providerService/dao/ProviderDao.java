@@ -16,5 +16,7 @@ public interface ProviderDao {
 	
 	List<Provider> getProvidersForServiec(String serviceId);
 	
-
+    Provider addProvider(Provider provider);
+    
+    ServiceInfo registerService(ServiceInfo service);
 }

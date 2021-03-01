@@ -6,19 +6,28 @@ public class Provider {
 	private String name;
 	private String gender;
 	private String serviceId;
+	private String serviceName;
 	private String phoneNo;
 	private AvailabilityStatus currentStatus;
 	
-	public Provider(String id, String name, String gender, String serviceId, String phoneNo,
+	public Provider() {
+		
+	}
+	
+	
+	public Provider(String id, String name, String gender, String serviceId, String serviceName, String phoneNo,
 			AvailabilityStatus currentStatus) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.serviceId = serviceId;
+		this.serviceName = serviceName;
 		this.phoneNo = phoneNo;
 		this.currentStatus = currentStatus;
 	}
+
+
 	public String getId() {
 		return id;
 	}
@@ -55,6 +64,17 @@ public class Provider {
 	public void setCurrentStatus(AvailabilityStatus currentStatus) {
 		this.currentStatus = currentStatus;
 	}
+
+
+	public String getServiceName() {
+		return serviceName;
+	}
+
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+	
 	
 	
 }

@@ -17,5 +17,9 @@ public interface ProviderService {
 	void isServiceAvaialbleForOrder(ServiceRequestInfo info);
 	
 	Provider getProviderForService(String serviceId);
+	
+	Provider addProvider(Provider provider);
+	
+	ServiceInfo registerService(ServiceInfo service);
 
 }
