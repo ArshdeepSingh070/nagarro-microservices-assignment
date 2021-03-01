@@ -14,7 +14,7 @@ public interface ProviderService {
 
 	ServiceInfo getServiceDetails(String id);
 	
-	void isServiceAvaialbleForOrder(ServiceRequestInfo info);
+	void isServiceAvaialbleForOrder(String info);
 	
 	Provider getProviderForService(String serviceId);
 	

@@ -15,17 +15,16 @@ import com.nagarro.microservices.orderService.model.OrderStatus;
 @Component
 public class OrderDaoImpl implements OrderDao {
 
-	private  Map<String, Order> orders  = new HashMap<String, Order>();
+	private static Map<String, Order> orders  = new HashMap<String, Order>();
 	
 	@Override
 	public Order getOrder(String id) {
-		List<Order> orderList = createdOrder();
-		return orderList.stream().filter(o -> id.equals(o.getOrderId())).findFirst().get();
+		createdOrder();
+		return orders.get(id);
 	}
 
 	@Override
 	public void updateOrder(Order order) {
-		createdOrder();
 		this.orders.put(order.getOrderId(), order);
 		
 	}
@@ -37,11 +36,9 @@ public class OrderDaoImpl implements OrderDao {
 	
 
 	// Pseudo order Details for demo
-	List<Order> createdOrder(){
-		List<Order> orderList = new ArrayList<>();
+	void createdOrder(){
 		Order order = new Order("001", "101", "201", "301", OrderStatus.PROCESSING, null, 0, 500);
-		orderList.add(order);
-		return orderList;
+		orders.put(order.getOrderId(), order);
 	}
 
 }

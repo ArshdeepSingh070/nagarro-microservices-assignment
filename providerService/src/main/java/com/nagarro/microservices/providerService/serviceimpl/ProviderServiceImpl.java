@@ -46,7 +46,10 @@ public class ProviderServiceImpl implements ProviderService {
 
 	@Override
 	@JmsListener(destination="OrderServiceRequest")
-	public void isServiceAvaialbleForOrder(ServiceRequestInfo info) {
+	public void isServiceAvaialbleForOrder(String test) {
+		ServiceRequestInfo info = new ServiceRequestInfo();
+		info.setOrderId(test.split("-")[0]);
+		info.setServiceId(test.split("-")[1]);
 		ServiceInfo service = providerDao.getServiceDetails(info.getServiceId());
 		if(service.getAvailability().equals(AvailabilityStatus.AVAILABLE)) {
 			ServiceAvaliableForOrderEvent(info.getOrderId());

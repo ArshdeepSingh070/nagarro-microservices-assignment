@@ -58,13 +58,14 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order createOrder(Order order) {
+		String test = order.getOrderId() + "-" + order.getServiceId();
 		if(Objects.isNull(order.getOrderId())){
 			order.setOrderId(UUID.randomUUID().toString());
 		}
 		order.setCreationTime(Instant.now());
 		order.setOrderStatus(OrderStatus.PROCESSING);
 		orderDao.saveOrder(order);
-		jmsTemplate.convertAndSend("OrderServiceRequest", order);
+		jmsTemplate.convertAndSend("OrderServiceRequest", test);
 		return order;
 	}
 
